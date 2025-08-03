@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "spring.kafka.topic.orchestrator",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kafka.topic.orchestrator'"
+  },
+  {
+    "name": "spring.kafka.topic.product-validation-success",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kafka.topic.product-validation-success'"
+  },
+  {
+    "name": "spring.kafka.topic.product-validation-fail",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.kafka.topic.product-validation-fail'"
+  }
+]}

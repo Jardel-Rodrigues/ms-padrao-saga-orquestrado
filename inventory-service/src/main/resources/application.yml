@@ -2,6 +2,31 @@ server:
   port: 8092
 
 spring:
-  application:
-    name: inventory-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER:192.168.1.12:9092}
+    topic:
+      orchestrator: orchestrator
+      inventory-success: inventory-success
+      inventory-fail: inventory-fail
+    consumer:
+      group-id: payment-group
+      auto-offset-reset: latest
 
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:192.168.1.12}:${DB_PORT:5435}/${DB_NAME:inventory-db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:234696}
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org:
+      apache:
+        kafka: OFF
