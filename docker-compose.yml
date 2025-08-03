@@ -91,3 +91,7 @@ services:
           brokers: ["kafka:29092"]
     depends_on:
       - "kafka"
+
+networks:
+  orchestrator-saga:
+    driver: bridge
