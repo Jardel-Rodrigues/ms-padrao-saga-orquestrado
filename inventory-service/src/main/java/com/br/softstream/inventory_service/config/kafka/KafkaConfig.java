@@ -2,6 +2,8 @@ package com.br.softstream.inventory_service.config.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -22,6 +25,9 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @RequiredArgsConstructor
 public class KafkaConfig {
+	
+	private static final Integer PARTITION_COUNT = 1;
+	private static final Integer REPLICA_COUNT = 1;
 
 	@Value("spring.kafka.bootstrap-servers")
 	private String bootstrapServers;
@@ -31,6 +37,15 @@ public class KafkaConfig {
 	
 	@Value("spring.kafka.consumer.auto-offset-reset")
 	private String autoOffsetReset;
+	
+	@Value("spring.kafka.topic.orchestrator")
+	private String orchestratorTipoc;
+	
+	@Value("spring.kafka.topic.inventory-success")
+	private String invevtorySuccessTopic;
+	
+	@Value("spring.kafka.topic.inventory-fail")
+	private String invevtoryFailTopic;
 
 	@Bean
 	ConsumerFactory<String, String> consumerFatory() {
@@ -62,6 +77,28 @@ public class KafkaConfig {
 	
 	@Bean
 	KafkaTemplate<String, String> kafkaTemplete(ProducerFactory<String, String> producerFactory) {
-		return new KafkaTemplate<String, String>(producerFactory);	
+		return new KafkaTemplate<String, String>(producerFactory);
+	}
+	
+	private NewTopic buildTopic(String name) {
+		return TopicBuilder.name(name)
+				.replicas(REPLICA_COUNT)
+				.partitions(PARTITION_COUNT)			
+				.build();
+	}
+	
+	@Bean
+	NewTopic orchestratorTipoc() {
+		return buildTopic(orchestratorTipoc);
+	}
+	
+	@Bean
+	NewTopic invevtorySuccessTopic() {
+		return buildTopic(invevtorySuccessTopic);
+	}
+	
+	@Bean
+	NewTopic invevtoryFailTopic() {
+		return buildTopic(invevtoryFailTopic);
 	}
 }

@@ -1,4 +1,4 @@
-package com.br.softstream.orchestrator_service;
+package com.br.softstream.orchestrator_service.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
