@@ -2,7 +2,6 @@ package com.br.softstream.order_service.config.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -18,7 +17,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
-
 import lombok.RequiredArgsConstructor;
 
 @EnableKafka
@@ -29,19 +27,19 @@ public class KafkaConfig {
 	private static final Integer PARTITION_COUNT = 1;
 	private static final Integer REPLICA_COUNT = 1;
 
-	@Value("spring.kafka.bootstrap-servers")
+	@Value("${spring.kafka.bootstrap-servers}")
 	private String bootstrapServers;
 	
-	@Value("spring.kafka.consumer.group-id")
+	@Value("${spring.kafka.consumer.group-id}")
 	private String groupId;
 	
-	@Value("spring.kafka.consumer.auto-offset-reset")
+	@Value("${spring.kafka.consumer.auto-offset-reset}")
 	private String autoOffsetReset;
 	
-	@Value("spring.kafka.topic.start-saga")
+	@Value("${spring.kafka.topic.start-saga}")
 	private String startSagaTopic;
 	
-	@Value("spring.kafka.topic.notify-ending")
+	@Value("${spring.kafka.topic.notify-ending}")
 	private String notifyEndingTopic;
 
 	@Bean
