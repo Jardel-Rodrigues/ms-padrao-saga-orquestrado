@@ -3,20 +3,17 @@ import threading
 
 threads = []
 
-
 def build_application(app):
     threads.append(app)
     print("Building application {}".format(app))
-    os.system("cd {} && gradle build -x test".format(app))
+    os.system("cd {} && mvn clean package -DskipTests".format(app))
     print("Application {} finished building!".format(app))
     threads.remove(app)
-
 
 def docker_compose_up():
     print("Running containers!")
     os.popen("docker-compose up --build -d").read()
     print("Pipeline finished!")
-
 
 def build_all_applications():
     print("Starting to build applications!")
@@ -31,7 +28,6 @@ def build_all_applications():
     threading.Thread(target=build_application,
                      args={"inventory-service"}).start()
 
-
 def remove_remaining_containers():
     print("Removing all containers.")
     os.system("docker-compose down")
@@ -43,7 +39,6 @@ def remove_remaining_containers():
             print("Stopping container {}".format(container))
             os.system("docker container stop {}".format(container))
         os.system("docker container prune -f")
-
 
 if __name__ == "__main__":
     print("Pipeline started!")
