@@ -21,7 +21,7 @@ spring:
       minimum-idle: 1
       maximum-pool-size: 2
       idle-timeout: 30000
-      pool-name: MeuHikariPool
+      pool-name: InventoryService
       max-lifetime: 1800000
       connection-timeout: 30000
       validation-timeout: 5000
