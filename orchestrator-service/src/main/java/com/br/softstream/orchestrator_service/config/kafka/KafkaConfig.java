@@ -1,8 +1,8 @@
 package com.br.softstream.orchestrator_service.config.kafka;
 
+import static com.br.softstream.orchestrator_service.enums.ETopics.*;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -18,7 +18,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
-import static com.br.softstream.orchestrator_service.core.enums.ETopics.*;
 
 import lombok.RequiredArgsConstructor;
 
