@@ -12,7 +12,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=234696
     ports:
-      - 27017:27017
+      - 27018:27018
   
   product-db:
     container_name: product-db
