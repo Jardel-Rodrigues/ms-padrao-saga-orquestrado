@@ -1,8 +1,8 @@
-package com.br.softstream.product_validation_service.utils;
+package com.br.softstream.orderservice.utils;
 
 import org.springframework.stereotype.Component;
 
-import com.br.softstream.product_validation_service.dto.EventDTO;
+import com.br.softstream.orderservice.document.Event;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
@@ -19,14 +19,13 @@ public class JsonUtil {
 		try {
 			return objectMapper.writeValueAsString(object);
 		} catch (Exception e) {
-			return e.getMessage();
+			return "";
 		}
 	}
 
-
-	public EventDTO toEvent(String json) {
+	public Event toEvent(String json) {
 		try {
-			return objectMapper.readValue(json, EventDTO.class);
+			return objectMapper.readValue(json, Event.class);
 		} catch (Exception e) {
 			return null;
 		}

@@ -1,6 +1,9 @@
 package com.br.softstream.inventory_service.dto;
 
+import static org.springframework.util.ObjectUtils.isEmpty;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.br.softstream.inventory_service.enums.ESagaStatus;
@@ -24,5 +27,12 @@ public class Event {
 	private ESagaStatus status;
 	private List<History> eventHistory;
 	private LocalDateTime createdAt;
+	
+	public void addToHistory(History history) {
+		if(isEmpty(this.eventHistory)) {
+			this.eventHistory = new ArrayList<>();
+		}
+		this.eventHistory.add(history);
+	}
 
 }

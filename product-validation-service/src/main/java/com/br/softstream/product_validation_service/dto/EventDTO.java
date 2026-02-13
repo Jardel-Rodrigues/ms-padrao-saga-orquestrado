@@ -1,13 +1,10 @@
-package com.br.softstream.orchestrator_service.dto;
+package com.br.softstream.product_validation_service.dto;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.br.softstream.orchestrator_service.enums.EEventSource;
-import com.br.softstream.orchestrator_service.enums.ESagaStatus;
+import com.br.softstream.product_validation_service.enums.ESagaStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,18 +15,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class EventDTO {
 
 	private String id;
 	private String transactionId;
 	private String orderId;
-	private Order payload;
-	private EEventSource source;
+	private OrderDTO payload;
+	private String source;
 	private ESagaStatus status;
-	private List<History> eventHistory;
+	private List<HistoryDTO> eventHistory;
 	private LocalDateTime createdAt;
 	
-	public void addToHistory(History history) {
+	public void addToHistory(HistoryDTO history) {
 		if(isEmpty(this.eventHistory)) {
 			this.eventHistory = new ArrayList<>();
 		}
