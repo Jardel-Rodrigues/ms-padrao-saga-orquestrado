@@ -36,6 +36,12 @@ public class OrchestratorService {
 		sendToProducerWithTopic(event, topic);
 	}
 	
+	public void continueSaga(Event event) {
+		var topic = getTopic(event);
+		log.info("SAGA CONTINUING FOR EVENT: {}", event.getId());
+		sendToProducerWithTopic(event, topic);
+	}
+
 	public void finishSagaSuccess(Event event) {
 		event.setSource(ORCHESTRATOR);
 		event.setStatus(SUCCESS);
@@ -52,16 +58,10 @@ public class OrchestratorService {
 		notifyFinishedSaga(event);
 	}
 	
-	public void continueSaga(Event event) {
-		var topic = getTopic(event);
-		log.info("SAGA CONTINUING FOR EVENT: {}", event.getId());
-		sendToProducerWithTopic(event, topic);
-	}
-	
 	private ETopics getTopic(Event event) {
 		return sagaExecutionController.getNextTopic(event);
 	}
-	
+
 	private void addHistory(Event event, String message) {
 		var history = History
 				.builder()
@@ -72,7 +72,7 @@ public class OrchestratorService {
 				.build();
 		event.addToHistory(history);
 	}
-	
+
 	private void notifyFinishedSaga(Event event) {
 		producer.sendEvent(jsonUtil.toJson(event), NOTIFY_ENDING.getTopic());
 	}
@@ -80,5 +80,5 @@ public class OrchestratorService {
 	private void sendToProducerWithTopic(Event event, ETopics topic) {
 		producer.sendEvent(jsonUtil.toJson(event), topic.getTopic());
 	}
-		
+	
 }

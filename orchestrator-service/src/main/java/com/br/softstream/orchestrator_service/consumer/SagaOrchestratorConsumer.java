@@ -23,22 +23,22 @@ public class SagaOrchestratorConsumer {
 		var event = jsonUtil.toEvent(payload);
 		orchestratorService.startSaga(event);
 	}
-		
-	@KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "${spring.kafka.topic.start-saga}")
+	
+	@KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "${spring.kafka.topic.orchestrator}")
 	public void consumerOrchestratorEvent(String payload) {
 		log.info("Recebendo evento {} para o topico orchestrator", payload);
 		var event = jsonUtil.toEvent(payload);
 		orchestratorService.continueSaga(event);
 	}
-		
-	@KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "${spring.kafka.topic.start-saga}")
+	
+	@KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "${spring.kafka.topic.finish-success}")
 	public void consumerFinishSuccessEvent(String payload) {
 		log.info("Recebendo evento {} para o topico finish-success", payload);
 		var event = jsonUtil.toEvent(payload);
 		orchestratorService.finishSagaSuccess(event);
 	}
-		
-	@KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "${spring.kafka.topic.start-saga}")
+
+	@KafkaListener(groupId = "${spring.kafka.consumer.group-id}", topics = "${spring.kafka.topic.finish-fail}")
 	public void consumerFinishFailEvent(String payload) {
 		log.info("Recebendo evento {} para o topico finish-fail", payload);
 		var event = jsonUtil.toEvent(payload);

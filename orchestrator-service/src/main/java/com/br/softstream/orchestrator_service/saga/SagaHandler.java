@@ -6,9 +6,7 @@ import static com.br.softstream.orchestrator_service.enums.ETopics.*;
 
 public final class SagaHandler {
 	
-	private SagaHandler() {
-		
-	}
+	private SagaHandler() {}
 	
 	public static final Object[][] SAGA_HANDLER = {
 			{ORCHESTRATOR, SUCCESS, PRODUCT_VALIDATION_SUCCESS},
@@ -24,9 +22,8 @@ public final class SagaHandler {
 			
 			{INVENTORY_SERVICE, ROLLBACK_PENDING, INVENTORY_FAIL},
 			{INVENTORY_SERVICE, FAIL, PAYMENT_FAIL},
-			{INVENTORY_SERVICE, SUCCESS, FINISH_SUCCESS}
-	};
-	
+			{INVENTORY_SERVICE, SUCCESS, FINISH_SUCCESS}};
+
 	public static final int EVENT_SOURCE_INDEX = 0;
 	public static final int SAGA_STATUS_INDEX = 1;
 	public static final int TOPIC_INDEX = 2;
