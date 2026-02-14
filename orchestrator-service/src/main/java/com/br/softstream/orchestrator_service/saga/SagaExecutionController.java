@@ -23,7 +23,7 @@ public class SagaExecutionController {
 
 	public ETopics getNextTopic(Event event) {
 		if(isEmpty(event.getSource()) || isEmpty(event.getStatus())) {
-			throw new ValidationException("Source and status must be informed!");		
+			throw new ValidationException("Source and status must be informed!");
 		}
 		var topic = findTopicBySourceAndStatus(event);
 		logCurrentSaga(event, topic);
